@@ -1,4 +1,4 @@
-# JavaScript Leetcode
+n=n+1# JavaScript Leetcode
 Leetcode started LC Javascript Challenge in May 2023. This is the list of all problems that were asked each day during the time.
 * [Day 1](#day-1)
 * [Day 2](#day-2)
@@ -120,3 +120,14 @@ f(1, 2); // Logs: Input [1, 2] Output 3
 
 ## Day 2
 Code: [Counter](./counter.js)
+
+Discussed earlier, a function has reference to all variables inside it and any other variable/function in its outer scope. This is called lexical environment. This promotes `encapsulation`. Each time the outer function is called, a separate copy of the function statements and variables inside it is maintained.
+
+## Day 3
+TODO
+
+## Day 7
+Code: [Function Composition](function_composition.js)
+
+`Function composition`is a concept in functional programming where the output of one function is used as the input of another function. In other words, it's the process of chaining two or more functions together so that the result of one function becomes the input to the next.
+The notation (f ∘ g)(x) is used in mathematics to represent function composition. It is read as "f composed with g" or "f of g", or f(g(x)).

@@ -18,7 +18,7 @@ Code: [Create Hello World Function](./create_hello_world_function.js)
 ### Functions
 Function can be defined using the word `function`.
 #### Basic Syntax
-```
+```js
 function f(a, b) {
   const sum = a + b;
   return sum;
@@ -27,7 +27,7 @@ console.log(f(3, 4)); // 7
 ```
 
 #### Anonymous Syntax
-```
+```js
 var f = function(a, b) {
   const sum = a + b;
   return sum;
@@ -36,7 +36,7 @@ console.log(f(3, 4)); // 7
 ```
 
 #### Immediately Invoked Function Expression (IIFE)
-```
+```js
 const result = (function(a, b) {
   const sum = a + b;
   return sum;
@@ -45,7 +45,7 @@ console.log(result); // 7
 ```
 
 #### Functions with Functions
-```
+```js
 function createFunction() {
   function f(a, b) {
     const sum = a + b;
@@ -59,7 +59,7 @@ console.log(f(3, 4)); // 7
 
 #### Function Hoisting
 A function can be used before it is initialized. Only done when declaration of functions is with the `function` (basic) syntax. However, this is considered bad practice as it reduces readability.
-```
+```js
 function createFunction() {
   return f;
   function f(a, b) {
@@ -73,7 +73,7 @@ console.log(f(3, 4)); // 7
 
 #### Closures
 When a function is created, it has access to a reference to all the variables declared around it (in the scope), also known as it's `lexical environment`. The combination of the function and its environment is called a `closure`.
-```
+```js
 function createAdder(a) {
   function f(b) {
     const sum = a + b;
@@ -89,7 +89,7 @@ In this example, `createAdder` passes the first parameter `a` and the inner func
 ### Arrow syntax
 It is a preferred way of declaring a function. These cannot be used as constructors. Calling them with `new` will throw `TypeError`. They do not support `yield`, hence cannot be generator functions.
 #### Basic Syntax
-```
+```js
 const f = (a, b) => {
   const sum = a + b;
   return sum;
@@ -99,14 +99,14 @@ console.log(f(3, 4)); // 7
 
 #### Omit Return
 If function statement is very small, then `return` statement can be omitted.
-```
+```js
 const f = (a, b) => a + b;
 console.log(f(3, 4)); // 7
 ```
 
 ### Rest Arguments
 `Spread`(...) allows an iterable to be expanded inplace.
-```
+```js
 function f(...args) {
   const sum = args[0] + args[1];
   return sum;
@@ -114,7 +114,7 @@ function f(...args) {
 console.log(f(3, 4)); // 7
 ```
 This can be used to create generic function factory.
-```
+```js
 function log(inputFunction) {
   return function(...args) {
      console.log("Input", args);
@@ -137,7 +137,7 @@ Code: [Counter II](./counter_ii.js)
 
 ### JavaScript Objects
 Objects are strings mapped to other objects. The string is called the key. The value can be any object, i.e., string, boolean, other object etc.
-```
+```js
 const d = {
   "num": 1,
   "str": "Hello World",
@@ -152,7 +152,7 @@ There are three ways of accessing the object items:
 * **Destructuring Notation**: `const {num, str} = d // 1 "Hello World"` This syntax is used to access multiple values in one go. The name of the variables should be same as the key name in the object. The variables can be declared using any keyword of variable declaration.
 
 ### Classes and Prototypes
-```
+```js
 class Person {
   constructor(name, age) {
     this.name = name;
@@ -168,7 +168,7 @@ const alice = new Person("Alice", 25);
 alice.greet(); // Logs: "My name is Alice"
 ```
 This is an example of a class. The constructor creates an object. Every time an instance of the class is created, a copy of the function method is also created. An efficient way of the above can be having just a single copy of the class method. This is possible if the function is a `prototype`.
-```
+```js
 const alice = {
   name: "Alice",
   age: 25,
@@ -184,7 +184,7 @@ JavaScript will first search for the function `greet`. If it cannot find it, it 
 
 ### Proxies
 Proxy is a powerful feature that allows overriding the default behaviour of objects. It allows you to create an object that can be used in place of the original object, but which may redefine fundamental Object operations like getting, setting, and defining properties.
-```
+```js
 const alice = new Proxy({name: "Alice", age: 25}, {
   get: (target, key) => {
     if (key === 'greet') {
@@ -202,7 +202,7 @@ It has two parameters:
 
 Some of the usages are as listed below:
 * Perform validation
-```
+```js
 const validator = {
   set: (obj, prop, value) => {
     if (prop === "age") {
@@ -219,7 +219,7 @@ person.age = 25; // Works fine
 person.age = -5; // Throws an error
 ```
 * Create logs when a key is accessed
-```
+```js
 const object = {
   "num": 1,
   "str": "Hello World",
@@ -236,7 +236,7 @@ const proxiedObject = new Proxy(object, {
 proxiedObject.num; // Logs: Accessing num
 ```
 * Throw error when an attempt to write a read-only value is made
-```
+```js
 const READONLY_KEYS = ['name'];
 
 const person = new Proxy({ name: "Alice", age: 25 }, {
@@ -253,8 +253,26 @@ person.name = "Bob"; // Throws Error
 * Create a modified version of an immutable object by writing to it's proxy. This is implemented with the popular library `immer`.
 
 ## Day 4
-Code: [Function Composition](function_composition.js)
-TODO
+Code: [Apply Transform Over Each Element in Array](apply-transform-over-each-element-in-array.js)
+
+Arrays can be declared and accessed in a number of ways.
+```js
+const newArr = [];
+for (let i = 0; i < arr.length; ++i) {
+    newArr[i] = i; // or newArr.push(i);
+}
+
+const newArr1 = new Array(newArr.length);https://www.w3schools.com/jsref/jsref_map.asp
+
+const newArr = new Int32Array(arr.length);
+```
+### Callbacks
+A callback is defined as a function passed as an argument to another function. It is used to write code that can be reused across different use-cases. One simple example is `Array.map`. It creates a new array from calling a function on every array element. It does not execute on empty elements and does not change the original array.
+```js
+// The following code squares each element of the array and create a new array with the result
+const numbers = [4, 9, 16, 25];
+const newArr = numbers.map(Math.sqrt);
+```
 
 ## Day 5
 Code: [Function Composition](function_composition.js)
